@@ -1,8 +1,8 @@
-ITER = 1e4; 
+ITER = 1500; 
 
 start_point = [5 5];
 
-goal_point = [30 25];
+goal_point = [-10 5];
 
 map = [start_point]; 
 epsilon = 0.3; 
@@ -12,8 +12,13 @@ obstacles = [2 3 2;
              7 8 2;
              -1 -1 2;
              -8 -5 2]; %centers and radii
-viscircles(obstacles(:, 1:end-1) ,obstacles(:, end))
+viscircles(obstacles(:, 1:end-1) ,obstacles(:, end), 'Color', 'g')
 
+
+ hold on
+ plot(start_point(1),start_point(2),'r*')
+ plot(goal_point(1),goal_point(2),'r*')
+ 
 for i=1:ITER-1
     
     
