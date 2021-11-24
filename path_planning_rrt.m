@@ -2,7 +2,7 @@ ITER = 1500;
 
 start_point = [5 5];
 
-goal_point = [-10 5];
+goal_point = [-10 5]; 
 
 map = [start_point]; 
 epsilon = 0.3; 
@@ -26,7 +26,8 @@ for i=1:ITER-1
     
     %calculate which point in the existing map has the smallest distance to
     %X_rand
-   [smallest_idx] = closest_point(map,X_rand); 
+    
+    [smallest_idx] = closest_point(map,X_rand); 
     X_near = map(smallest_idx, :); 
     X_new = X_near + (X_rand - X_near)/norm(X_rand - X_near)*epsilon ; %new point is proportional to the distance from the nearest point
     
