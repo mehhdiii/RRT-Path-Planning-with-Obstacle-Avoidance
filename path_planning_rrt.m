@@ -19,8 +19,10 @@ viscircles(obstacles(:, 1:end-1) ,obstacles(:, end), 'Color', 'g')
 
 
  hold on
- plot(start_point(1),start_point(2),'r*')
- plot(goal_point(1),goal_point(2),'r*')
+ plot(start_point(1),start_point(2),'r*','MarkerSize',10)
+ text(start_point(1),start_point(2), 'S')
+ plot(goal_point(1),goal_point(2),'r*','MarkerSize',10)
+ text(goal_point(1),goal_point(2), 'G')
  
 for i=1:ITER-1
     
@@ -63,3 +65,5 @@ while X_near~=start_point
     X_near = X_parent;
     
 end 
+
+print -dpng algo_output.png

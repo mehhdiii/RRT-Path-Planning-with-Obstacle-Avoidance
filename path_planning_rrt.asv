@@ -19,8 +19,9 @@ viscircles(obstacles(:, 1:end-1) ,obstacles(:, end), 'Color', 'g')
 
 
  hold on
- plot(start_point(1),start_point(2),'r*')
- plot(goal_point(1),goal_point(2),'r*')
+ plot(start_point(1),start_point(2),'k*','MarkerSize',14)
+ text(start_point(1),start_point(2), )
+ plot(goal_point(1),goal_point(2),'k*','MarkerSize',14)
  
 for i=1:ITER-1
     
@@ -49,7 +50,7 @@ X_near = map(smallest_idx, 1:end-1); % nearest point to the goal
 con = [X_near; goal_point];
 line(con(:,1), con(:,2),'Color', 'r')
 
-while true
+while X_near~=start_point 
     
     parent_idx = map(smallest_idx,end);
     
@@ -57,9 +58,11 @@ while true
     
     con = [X_near; X_parent];
     
+    line(con(:,1), con(:,2),'Color', 'r', 'linewidth',2)
     
-    break
+    smallest_idx = parent_idx;
+    X_near = X_parent;
+    
 end 
 
-
-map(:,end)
+print -dpng algo_output.png
