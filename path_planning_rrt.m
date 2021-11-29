@@ -4,7 +4,7 @@ start_point = [5 5];
 
 goal_point = [-10 5]; 
 
-map = [start_point]; 
+map = [start_point, 1]; 
 epsilon = 0.3; 
 
 %obstacles: 
@@ -31,15 +31,35 @@ for i=1:ITER-1
     %X_rand
     
     [smallest_idx] = closest_point(map,X_rand); 
-    X_near = map(smallest_idx, :); 
+    X_near = map(smallest_idx, 1:end-1); 
     X_new = X_near + (X_rand - X_near)/norm(X_rand - X_near)*epsilon ; %new point is proportional to the distance from the nearest point
     
     dis_from_obs = sqrt((X_new(1)-obstacles(:, 1)).^2 + (X_new(2)-obstacles(:, 2)).^2); 
     if sum(dis_from_obs > obstacles(:, end))== NoOfobstacles
-        map = [map; X_new]; 
+        map = [map; [X_new, smallest_idx]]; 
         con = [X_near; X_new];
         line(con(:,1), con(:,2))
     end
 
-
 end
+
+% i am at the 
+[smallest_idx] = closest_point(map,goal_point); 
+X_near = map(smallest_idx, 1:end-1); % nearest point to the goal 
+con = [X_near; goal_point];
+line(con(:,1), con(:,2),'Color', 'r')
+
+while X_near~=start_point 
+    
+    parent_idx = map(smallest_idx,end);
+    
+    X_parent = map(parent_idx, 1:end-1);
+    
+    con = [X_near; X_parent];
+    
+    line(con(:,1), con(:,2),'Color', 'r', 'linewidth',2)
+    
+    smallest_idx = parent_idx;
+    X_near = X_parent;
+    
+end 
