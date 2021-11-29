@@ -13,8 +13,7 @@ obstacles = [2 3 2;
              -1 -1 2;
              -8 -5 2]; %centers and radii
          
-NoOfobstacles = size(obstacles,1);
-         
+
 viscircles(obstacles(:, 1:end-1) ,obstacles(:, end), 'Color', 'g')
 
 
@@ -35,7 +34,7 @@ for i=1:ITER-1
     X_new = X_near + (X_rand - X_near)/norm(X_rand - X_near)*epsilon ; %new point is proportional to the distance from the nearest point
     
     dis_from_obs = sqrt((X_new(1)-obstacles(:, 1)).^2 + (X_new(2)-obstacles(:, 2)).^2); 
-    if sum(dis_from_obs > obstacles(:, end))== NoOfobstacles
+    if sum(dis_from_obs > obstacles(:, end))==4
         map = [map; X_new]; 
         con = [X_near; X_new];
         line(con(:,1), con(:,2))
