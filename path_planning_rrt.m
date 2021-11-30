@@ -1,4 +1,5 @@
 ITER = 1500; 
+close all; 
 
 start_point = [5 5];
 
@@ -23,9 +24,9 @@ viscircles(obstacles(:, 1:end-1) ,obstacles(:, end), 'Color', 'g')
  text(start_point(1),start_point(2), 'S')
  plot(goal_point(1),goal_point(2),'r*','MarkerSize',10)
  text(goal_point(1),goal_point(2), 'G')
- 
-for i=1:ITER-1
-    
+ X_new = start_point; 
+while norm(X_new-goal_point) > 0.1
+    i = i+1;
     
     X_rand = 10*randn([1, 2]); %take a random point in the environment
     
@@ -41,11 +42,12 @@ for i=1:ITER-1
         map = [map; [X_new, smallest_idx]]; 
         con = [X_near; X_new];
         line(con(:,1), con(:,2))
+        drawnow
     end
 
 end
 
-% i am at the 
+
 [smallest_idx] = closest_point(map,goal_point); 
 X_near = map(smallest_idx, 1:end-1); % nearest point to the goal 
 con = [X_near; goal_point];
