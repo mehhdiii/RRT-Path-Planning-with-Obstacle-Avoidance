@@ -1,7 +1,7 @@
 ITER = 1500; 
 close all; 
 
-start_point = [5 5];
+start_point = [5 2];
 
 goal_point = [-10 5]; 
 
@@ -27,8 +27,12 @@ viscircles(obstacles(:, 1:end-1) ,obstacles(:, end), 'Color', 'g')
  X_new = start_point; 
 while norm(X_new-goal_point) > 0.1
     i = i+1;
-    
-    X_rand = 10*randn([1, 2]); %take a random point in the environment
+    if randn>0
+
+        X_rand = 10*randn([1, 2]); %take a random point in the environment
+    else
+        X_rand = goal_point; 
+    end
     
     %calculate which point in the existing map has the smallest distance to
     %X_rand
