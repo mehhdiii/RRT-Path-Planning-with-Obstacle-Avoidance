@@ -1,7 +1,8 @@
+rng('shuffle')
 ITER = 1500; 
 close all; 
 
-start_point = [5 2];
+start_point = [10 -8];
 
 goal_point = [-10 5]; 
 
@@ -25,7 +26,7 @@ viscircles(obstacles(:, 1:end-1) ,obstacles(:, end), 'Color', 'g')
  plot(goal_point(1),goal_point(2),'r*','MarkerSize',10)
  text(goal_point(1),goal_point(2), 'G')
  X_new = start_point; 
-while norm(X_new-goal_point) > 0.1
+while norm(X_new-goal_point) > 0.2
     i = i+1;
     if randn>0
 
